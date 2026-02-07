@@ -1,0 +1,8 @@
+{
+  "name": "Master Control ERP",
+  "description": "A comprehensive task-based ERP for managing business operations, productivity, and employee performance with AI-driven insights.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}
