@@ -5,6 +5,7 @@ import {
   LineChart, Line, PieChart, Pie, Cell, AreaChart, Area, 
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ComposedChart
 } from 'recharts';
+import { PLAN_DETAILS, MASTER_MODULES } from '../constants';
 import { 
   Building2, 
   Plus, 
@@ -13,225 +14,190 @@ import {
   DollarSign, 
   Activity, 
   ArrowUpRight,
-  Clock,
-  PhoneCall,
-  Video,
+  Package,
+  Layers,
+  Search,
   ChevronRight,
   Zap,
-  Target
+  Target,
+  Edit3,
+  CheckCircle,
+  XCircle,
+  Star,
+  Crown
 } from 'lucide-react';
 
 export const SuperAdminView: React.FC = () => {
-  const [tab, setTab] = useState<'kpis' | 'prospectos' | 'clientes'>('kpis');
+  const [tab, setTab] = useState<'kpis' | 'prospectos' | 'clientes' | 'planes'>('kpis');
 
-  // Datos para las 6 gráficas
-  const registrosData = [
-    { name: 'Ene', val: 12 }, { name: 'Feb', val: 18 }, { name: 'Mar', val: 15 }, 
-    { name: 'Abr', val: 25 }, { name: 'May', val: 32 }, { name: 'Jun', val: 45 }
+  // Mock data para las gráficas
+  const historicoEmpresas = [
+    { name: 'Ene', val: 120 }, { name: 'Feb', val: 210 }, { name: 'Mar', val: 180 }, 
+    { name: 'Abr', val: 240 }, { name: 'May', val: 320 }, { name: 'Jun', val: 450 }
   ];
 
-  const ingresosData = [
-    { name: 'Ene', income: 4500 }, { name: 'Feb', income: 5200 }, { name: 'Mar', income: 4800 }, 
-    { name: 'Abr', income: 6100 }, { name: 'May', income: 7200 }, { name: 'Jun', income: 8500 }
+  const ingresosPaquetes = [
+    { name: 'Trial', income: 0 }, 
+    { name: 'Gold', income: 133052 }, 
+    { name: 'Premium', income: 79800 }, 
+    { name: 'Master', income: 224850 }
   ];
 
-  const planesData = [
-    { name: 'Trial', value: 400 }, { name: 'Gold', value: 300 }, { name: 'Premium', value: 200 }, { name: 'Master', value: 100 }
+  const distribucionPlanes = [
+    { name: 'Trial', value: 400 }, { name: 'Premium', value: 300 }, { name: 'Gold', value: 200 }, { name: 'Master', value: 100 }
   ];
 
-  const radarData = [
-    { subject: 'Uptime', A: 120, fullMark: 150 },
-    { subject: 'Soporte', A: 98, fullMark: 150 },
-    { subject: 'Ventas', A: 86, fullMark: 150 },
-    { subject: 'Retención', A: 99, fullMark: 150 },
-    { subject: 'Churn', A: 45, fullMark: 150 },
+  const metasSistema = [
+    { subject: 'Uptime', A: 145, fullMark: 150 },
+    { subject: 'Soporte', A: 120, fullMark: 150 },
+    { subject: 'Ventas', A: 135, fullMark: 150 },
+    { subject: 'Retención', A: 140, fullMark: 150 },
+    { subject: 'Churn', A: 30, fullMark: 150 },
   ];
 
-  const activityData = [
-    { time: '08:00', users: 120 }, { time: '12:00', users: 450 }, { time: '16:00', users: 380 }, { time: '20:00', users: 210 }
+  const actividadRealTime = [
+    { time: '08:00', users: 340 }, { time: '12:00', users: 890 }, { time: '16:00', users: 720 }, { time: '20:00', users: 450 }
   ];
 
-  const conversionData = [
-    { name: 'Prospectos', total: 1000, conv: 800 },
-    { name: 'Trials', total: 500, conv: 300 },
-    { name: 'Paid', total: 200, conv: 180 },
+  const funnelVentas = [
+    { name: 'Leads', total: 1200, conv: 800 },
+    { name: 'Pruebas', total: 600, conv: 420 },
+    { name: 'Pagos', total: 300, conv: 280 },
   ];
 
-  const COLORS = ['#22c55e', '#a855f7', '#3b82f6', '#ffffff'];
+  const COLORS = ['#22c55e', '#3b82f6', '#a855f7', '#ffffff'];
 
   return (
     <div className="space-y-12 animate-in fade-in duration-500 pb-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div>
-          <h2 className="text-4xl font-black text-white tracking-tighter uppercase">Protocolo Global Super Admin</h2>
-          <p className="text-[#22c55e] font-black text-[10px] uppercase tracking-[0.5em] mt-2">Maia Cloud Control</p>
+          <h2 className="text-4xl font-black text-white tracking-tighter uppercase italic">Protocolo <span className="text-[#22c55e]">Omni</span> Maestro</h2>
+          <p className="text-[#22c55e] font-black text-[11px] uppercase tracking-[0.6em] mt-2 flex items-center gap-3">
+             <span className="w-8 h-0.5 bg-[#22c55e] rounded-full" /> CONTROL CENTRAL DE LA NUBE
+          </p>
         </div>
         <div className="flex bg-black/80 p-1.5 rounded-3xl border-[3px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.2)] backdrop-blur-xl">
-           <button onClick={() => setTab('kpis')} className={`px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${tab === 'kpis' ? 'bg-[#22c55e] text-black shadow-lg' : 'text-slate-400'}`}>Métricas</button>
-           <button onClick={() => setTab('prospectos')} className={`px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${tab === 'prospectos' ? 'bg-[#22c55e] text-black shadow-lg' : 'text-slate-400'}`}>Prospectos</button>
+           <button onClick={() => setTab('kpis')} className={`px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${tab === 'kpis' ? 'bg-[#22c55e] text-black shadow-lg' : 'text-slate-400'}`}>Estadísticas</button>
+           <button onClick={() => setTab('planes')} className={`px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${tab === 'planes' ? 'bg-[#22c55e] text-black shadow-lg' : 'text-slate-400'}`}>Paquetes</button>
            <button onClick={() => setTab('clientes')} className={`px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${tab === 'clientes' ? 'bg-[#22c55e] text-black shadow-lg' : 'text-slate-400'}`}>Clientes</button>
         </div>
       </div>
 
       {tab === 'kpis' && (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <StatCard label="PRUEBAS ACTIVAS" val="12" icon={<Activity />} color="#22c55e" />
-            <StatCard label="PAQUETES GOLD" val="148" icon={<DollarSign />} color="#3b82f6" />
-            <StatCard label="EMPRESAS MAIA" val="56" icon={<Building2 />} color="#a855f7" />
-            <StatCard label="USUARIOS TOTAL" val="2.4k" icon={<Users />} color="#ffffff" />
-          </div>
+        <div className="grid grid-cols-12 gap-8">
+          <StatCard label="PRUEBAS ACTIVAS" val="42" icon={<Activity />} color="#22c55e" trend="+12%" className="col-span-3" />
+          <StatCard label="PAQUETES GOLD" val="148" icon={<Zap />} color="#eab308" trend="+5%" className="col-span-3" />
+          {/* Fix: Added missing Star icon to imports */}
+          <StatCard label="TOTAL PREMIUM" val="200" icon={<Star />} color="#3b82f6" trend="+2%" className="col-span-3" />
+          {/* Fix: Added missing Crown icon to imports */}
+          <StatCard label="EMPRESAS MASTER" val="150" icon={<Crown />} color="#a855f7" trend="+15%" className="col-span-3" />
 
-          <div className="grid grid-cols-12 gap-8">
-            {/* Gráfica 1: Crecimiento de Empresas */}
-            <ChartContainer title="CRECIMIENTO DE EMPRESAS" className="col-span-12 lg:col-span-8">
-              <ResponsiveContainer width="100%" height={300}>
-                <AreaChart data={registrosData}>
-                  <defs>
-                    <linearGradient id="colorReg" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#22c55e" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#22c55e" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#ffffff05" vertical={false} />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill:'#64748b', fontSize:10, fontWeight:900}} />
-                  <YAxis hide />
+          <ChartBox title="FLUJO DE INGRESOS MENSUAL" className="col-span-12 lg:col-span-8">
+            <ResponsiveContainer width="100%" height={320}>
+              <AreaChart data={historicoEmpresas}>
+                <defs>
+                  <linearGradient id="colorVal" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#22c55e" stopOpacity={0.4}/>
+                    <stop offset="95%" stopColor="#22c55e" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#ffffff05" vertical={false} />
+                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill:'#64748b', fontSize:10, fontWeight:900}} />
+                <YAxis hide />
+                <Tooltip contentStyle={{backgroundColor: '#000', border:'2px solid #22c55e', borderRadius:'16px'}} />
+                <Area type="monotone" dataKey="val" stroke="#22c55e" strokeWidth={5} fillOpacity={1} fill="url(#colorVal)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </ChartBox>
+
+          <ChartBox title="DISTRIBUCIÓN DE PLANES" className="col-span-12 lg:col-span-4">
+             <ResponsiveContainer width="100%" height={320}>
+                <PieChart>
+                  <Pie data={distribucionPlanes} innerRadius={70} outerRadius={100} paddingAngle={8} dataKey="value">
+                    {distribucionPlanes.map((_, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
                   <Tooltip contentStyle={{backgroundColor: '#000', border:'2px solid #22c55e', borderRadius:'16px'}} />
-                  <Area type="monotone" dataKey="val" stroke="#22c55e" strokeWidth={4} fillOpacity={1} fill="url(#colorReg)" />
-                </AreaChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-
-            {/* Gráfica 2: Distribución de Planes */}
-            <ChartContainer title="DISTRIBUCIÓN DE PLANES" className="col-span-12 lg:col-span-4">
-              <div className="h-[300px] relative">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie data={planesData} innerRadius={60} outerRadius={90} paddingAngle={8} dataKey="value">
-                      {planesData.map((_, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke="transparent" />
-                      ))}
-                    </Pie>
-                    <Tooltip contentStyle={{backgroundColor: '#000', border:'2px solid #22c55e', borderRadius:'16px'}} />
-                  </PieChart>
-                </ResponsiveContainer>
-                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <p className="text-3xl font-black text-white">100%</p>
-                  <p className="text-[8px] font-black text-slate-500 uppercase tracking-widest">ACTIVO</p>
-                </div>
-              </div>
-            </ChartContainer>
-
-            {/* Gráfica 3: Ingresos Globales */}
-            <ChartContainer title="FLUJO DE INGRESOS ($)" className="col-span-12 lg:col-span-6">
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={ingresosData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#ffffff05" vertical={false} />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill:'#64748b', fontSize:10, fontWeight:900}} />
-                  <YAxis hide />
-                  <Tooltip cursor={{fill: 'rgba(255,255,255,0.03)'}} contentStyle={{backgroundColor: '#000', border:'2px solid #22c55e', borderRadius:'16px'}} />
-                  <Bar dataKey="income" fill="#3b82f6" radius={[6, 6, 0, 0]} barSize={40} />
-                </BarChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-
-            {/* Gráfica 4: Salud del Ecosistema (Radar) */}
-            <ChartContainer title="SALUD DEL ECOSISTEMA" className="col-span-12 lg:col-span-6">
-              <ResponsiveContainer width="100%" height={300}>
-                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
-                  <PolarGrid stroke="#ffffff10" />
-                  <PolarAngleAxis dataKey="subject" tick={{fill: '#64748b', fontSize: 10, fontWeight: 900}} />
-                  <PolarRadiusAxis angle={30} domain={[0, 150]} hide />
-                  <Radar name="Meta" dataKey="A" stroke="#a855f7" fill="#a855f7" fillOpacity={0.6} />
-                  <Tooltip contentStyle={{backgroundColor: '#000', border:'2px solid #a855f7', borderRadius:'16px'}} />
-                </RadarChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-
-            {/* Gráfica 5: Usuarios en Tiempo Real */}
-            <ChartContainer title="ACTIVIDAD DE USUARIOS (24H)" className="col-span-12 lg:col-span-5">
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={activityData}>
-                  <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{fill:'#64748b', fontSize:10, fontWeight:900}} />
-                  <YAxis hide />
-                  <Tooltip contentStyle={{backgroundColor: '#000', border:'2px solid #22c55e', borderRadius:'16px'}} />
-                  <Line type="stepAfter" dataKey="users" stroke="#ffffff" strokeWidth={3} dot={{ r: 4, fill: '#22c55e' }} />
-                </LineChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-
-            {/* Gráfica 6: Embudo de Conversión */}
-            <ChartContainer title="EMBUDO DE CONVERSIÓN" className="col-span-12 lg:col-span-7">
-              <ResponsiveContainer width="100%" height={300}>
-                <ComposedChart data={conversionData} layout="vertical">
-                  <XAxis type="number" hide />
-                  <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{fill:'#64748b', fontSize:10, fontWeight:900}} />
-                  <Tooltip contentStyle={{backgroundColor: '#000', border:'2px solid #22c55e', borderRadius:'16px'}} />
-                  <Bar dataKey="total" barSize={20} fill="#ffffff10" radius={[0, 10, 10, 0]} />
-                  <Bar dataKey="conv" barSize={12} fill="#22c55e" radius={[0, 10, 10, 0]} />
-                </ComposedChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-          </div>
-        </>
+                </PieChart>
+             </ResponsiveContainer>
+          </ChartBox>
+        </div>
       )}
 
-      {tab === 'prospectos' && (
-        <div className="bg-black/40 backdrop-blur-3xl rounded-[3rem] p-10 border-[3px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.3)]">
+      {tab === 'planes' && (
+        <div className="bg-black/40 backdrop-blur-3xl rounded-[4rem] p-12 border-[4px] border-[#22c55e] shadow-[0_0_30px_rgba(34,197,94,0.2)]">
            <div className="flex justify-between items-center mb-12">
-              <h3 className="text-xl font-black text-white tracking-widest uppercase">Gestión de Prospectos</h3>
-              <button className="px-8 py-4 bg-[#22c55e] text-black rounded-2xl font-black text-[10px] uppercase tracking-widest flex items-center gap-2 shadow-[0_0_15px_#22c55e]">
-                 <Plus className="w-5 h-5" /> Nuevo Prospecto
-              </button>
+              <h3 className="text-2xl font-black text-white tracking-widest uppercase">Editor de Paquetes Maestros</h3>
+              <button className="px-8 py-4 bg-[#22c55e] text-black rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-[0_0_20px_#22c55e]">Añadir Nueva Promoción</button>
            </div>
-           {/* Prospectos table content here (already existing in previous file, kept minimal for logic) */}
-           <div className="overflow-x-auto">
-             <table className="w-full text-left">
-               <thead className="text-[10px] font-black text-[#22c55e] uppercase tracking-[0.2em] border-b border-white/10">
-                 <tr>
-                   <th className="px-6 py-5">Empresa</th>
-                   <th className="px-6 py-5">Status</th>
-                   <th className="px-6 py-5">Acción</th>
-                   <th className="px-6 py-5 text-right">Control</th>
-                 </tr>
-               </thead>
-               <tbody className="divide-y divide-white/5">
-                 {[1,2,3].map(i => (
-                   <tr key={i} className="hover:bg-white/5 transition-colors">
-                     <td className="px-6 py-6 font-black text-white uppercase text-xs tracking-widest">Prospecto Corp {i}</td>
-                     <td className="px-6 py-6 text-xs font-black text-slate-500">PENDIENTE</td>
-                     <td className="px-6 py-6 text-xs font-black text-indigo-400">LLAMADA MAÑANA</td>
-                     <td className="px-6 py-6 text-right"><ChevronRight className="inline text-[#22c55e]" /></td>
-                   </tr>
-                 ))}
-               </tbody>
-             </table>
+           
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {Object.entries(PLAN_DETAILS).map(([key, details]) => (
+                 <div key={key} className="p-8 bg-white/5 rounded-[2.5rem] border-[3px] border-white/5 space-y-6">
+                    <div className="flex justify-between items-center">
+                       <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">ID: {key}</span>
+                       <Edit3 className="w-4 h-4 text-[#22c55e] cursor-pointer" />
+                    </div>
+                    <h4 className="text-xl font-black text-white uppercase tracking-tighter">{details.name}</h4>
+                    <p className="text-4xl font-black text-[#22c55e] tracking-tighter">${details.price}</p>
+                    <div className="space-y-3 pt-4 border-t border-white/5">
+                       <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center justify-between">
+                          EMPLEADOS: <span className="text-white">{details.limits.employees}</span>
+                       </p>
+                       <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest flex items-center justify-between">
+                          SUPERVISORES: <span className="text-white">{details.limits.supervisors}</span>
+                       </p>
+                    </div>
+                 </div>
+              ))}
            </div>
         </div>
       )}
 
       {tab === 'clientes' && (
-        <div className="bg-black/40 backdrop-blur-3xl rounded-[3rem] p-10 border-[3px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.3)]">
-           <h3 className="text-xl font-black text-white tracking-widest uppercase mb-12">Cartera de Clientes</h3>
+        <div className="bg-black/40 backdrop-blur-3xl rounded-[4rem] p-12 border-[4px] border-[#22c55e] shadow-[0_0_30px_rgba(34,197,94,0.2)]">
+           <div className="flex justify-between items-center mb-16">
+              <h3 className="text-2xl font-black text-white tracking-widest uppercase">Gestión de Clientes y Suscripciones</h3>
+              <div className="relative">
+                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                 <input type="text" placeholder="BUSCAR EMPRESA..." className="bg-white/5 border border-white/10 rounded-2xl py-3 pl-12 pr-6 text-[10px] font-black uppercase tracking-widest text-white outline-none focus:border-[#22c55e]" />
+              </div>
+           </div>
+
            <div className="overflow-x-auto">
-             <table className="w-full text-left">
-               <thead className="text-[10px] font-black text-[#22c55e] uppercase tracking-[0.2em] border-b border-white/10">
-                 <tr>
-                   <th className="px-6 py-5">Empresa / ID</th>
-                   <th className="px-6 py-5">Plan</th>
-                   <th className="px-6 py-5 text-right">Efectividad</th>
-                 </tr>
-               </thead>
-               <tbody className="divide-y divide-white/5">
-                 {[1,2,3].map(i => (
-                   <tr key={i} className="hover:bg-white/5 transition-colors">
-                     <td className="px-6 py-6 font-black text-white uppercase text-xs tracking-widest">Empresa {i} S.A.</td>
-                     <td className="px-6 py-6"><span className="px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-lg text-[9px] font-black">MASTER</span></td>
-                     <td className="px-6 py-6 text-right font-black text-[#22c55e]">98.5%</td>
-                   </tr>
-                 ))}
-               </tbody>
-             </table>
+              <table className="w-full text-left">
+                 <thead className="text-[10px] font-black text-[#22c55e] uppercase tracking-[0.4em] border-b border-white/10">
+                    <tr>
+                       <th className="px-8 py-6">CLIENTE</th>
+                       <th className="px-8 py-6">PAQUETE ACTUAL</th>
+                       <th className="px-8 py-6">MÓDULOS ACTIVOS</th>
+                       <th className="px-8 py-6 text-right">ACCIONES</th>
+                    </tr>
+                 </thead>
+                 <tbody className="divide-y divide-white/5">
+                    {[1,2,3].map(i => (
+                       <tr key={i} className="hover:bg-white/5 transition-all">
+                          <td className="px-8 py-8 font-black text-white uppercase text-xs tracking-widest">Empresa {i} S.A. de C.V.</td>
+                          <td className="px-8 py-8">
+                             <div className="flex items-center gap-3">
+                                <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_8px_#6366f1]" />
+                                <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">GOLD PACK</span>
+                             </div>
+                          </td>
+                          <td className="px-8 py-8">
+                             <div className="flex gap-2">
+                                <span className="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-lg text-[8px] font-black border border-purple-500/30">RESTAURANT</span>
+                                <span className="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-lg text-[8px] font-black border border-purple-500/30">RRHH</span>
+                             </div>
+                          </td>
+                          <td className="px-8 py-8 text-right">
+                             <button className="px-6 py-2 border-2 border-[#22c55e] text-[#22c55e] rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-[#22c55e] hover:text-black transition-all">Modificar Plan</button>
+                          </td>
+                       </tr>
+                    ))}
+                 </tbody>
+              </table>
            </div>
         </div>
       )}
@@ -239,28 +205,27 @@ export const SuperAdminView: React.FC = () => {
   );
 };
 
-const StatCard = ({ label, val, icon, color }: any) => (
-  <div className="bg-black/40 border-[3px] border-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.15)] p-8 rounded-[2.5rem] flex items-center justify-between group hover:scale-105 transition-all cursor-default">
-    <div>
-       <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-2">{label}</p>
-       <p className="text-4xl font-black text-white tracking-tighter">{val}</p>
+const StatCard = ({ label, val, icon, color, trend, className }: any) => (
+  <div className={`bg-black/40 border-[4px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.2)] p-10 rounded-[3rem] flex items-center justify-between group hover:scale-105 transition-all cursor-default relative overflow-hidden ${className}`}>
+    <div className="relative z-10">
+       <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mb-3">{label}</p>
+       <div className="flex items-end gap-3">
+         <p className="text-4xl font-black text-white tracking-tighter">{val}</p>
+         <span className="text-[9px] font-black text-[#22c55e] mb-2">{trend}</span>
+       </div>
     </div>
-    <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-[#22c55e]/10 transition-colors" style={{ color: color }}>
-       {React.cloneElement(icon, { size: 28 })}
+    <div className="p-5 bg-white/5 rounded-3xl group-hover:bg-[#22c55e]/10 transition-all" style={{ color: color }}>
+       {React.cloneElement(icon, { size: 32 })}
     </div>
   </div>
 );
 
-const ChartContainer = ({ title, children, className }: any) => (
-  <div className={`bg-black/40 backdrop-blur-3xl border-[3px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.2)] rounded-[3rem] p-10 ${className}`}>
-     <h4 className="text-[10px] font-black text-white uppercase tracking-[0.5em] mb-10 text-center">{title}</h4>
+const ChartBox = ({ title, children, className }: any) => (
+  <div className={`bg-black/40 backdrop-blur-3xl border-[4px] border-[#22c55e] shadow-[0_0_30px_rgba(34,197,94,0.25)] rounded-[4rem] p-12 relative overflow-hidden ${className}`}>
+     <h4 className="text-[11px] font-black text-white uppercase tracking-[0.8em] mb-12 flex items-center gap-4">
+        <span className="w-1.5 h-1.5 bg-[#22c55e] rounded-full" />
+        {title}
+     </h4>
      {children}
-  </div>
-);
-
-const StatusCounter = ({ label, count, color }: any) => (
-  <div className="p-6 rounded-2xl bg-black border-[2px] border-white/5 flex justify-between items-center group hover:border-[#22c55e] transition-all">
-     <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest group-hover:text-white">{label}</p>
-     <span className="text-2xl font-black text-white" style={{ color }}>{count}</span>
   </div>
 );

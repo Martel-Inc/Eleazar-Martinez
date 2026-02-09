@@ -9,8 +9,8 @@ export enum UserRole {
 
 export enum CompanyPlan {
   TRIAL = 'TRIAL',
-  GOLD = 'GOLD',
   PREMIUM = 'PREMIUM',
+  GOLD = 'GOLD',
   MASTER = 'MASTER'
 }
 
@@ -23,19 +23,15 @@ export enum TaskTypification {
   POR_EJECUTAR = 'POR_EJECUTAR'
 }
 
-// Valor de tareas según imagen técnica
 export const TASK_POINTS: Record<TaskTypification, number> = {
   [TaskTypification.COMPLETADA]: 10,
   [TaskTypification.COMPLETADA_TARDE]: 7,
   [TaskTypification.COMPLETADA_MALA_CALIDAD]: 5,
   [TaskTypification.COMPLETADA_TARDE_MALA_CALIDAD]: 2,
   [TaskTypification.SIN_EJECUTAR]: 0,
-  [TaskTypification.POR_EJECUTAR]: 0 // No cuenta para efectividad según imagen
+  [TaskTypification.POR_EJECUTAR]: 0
 };
 
-/**
- * TaskDefinition interface for task catalog
- */
 export interface TaskDefinition {
   id: string;
   name: string;
@@ -46,9 +42,6 @@ export interface TaskDefinition {
   qualityStandard: string;
 }
 
-/**
- * TaskAssignment interface for task tracking
- */
 export interface TaskAssignment {
   id: string;
   taskId: string;
@@ -76,10 +69,12 @@ export interface Company {
   plan: CompanyPlan;
   modules: string[];
   onboardingCompleted: boolean;
-  // Layout Cliente de imagen
-  fechaRegistro?: string;
-  contactoPrincipal?: string;
-  supervisores?: string[]; // emails
+  // Límites según contrato
+  maxEmployees: number;
+  maxSupervisors: number;
+  maxManagers: number;
+  extraSupervisors: number;
+  extraEmployeeBlocks: number;
 }
 
 export interface Employee {
@@ -90,7 +85,7 @@ export interface Employee {
   fechaIngreso: string;
   departmentId: string;
   areaId: string;
-  jornadaLaboral: number; // Horas por día
+  jornadaLaboral: number;
   diaDescanso: string;
   email: string;
   role: UserRole;
@@ -108,7 +103,7 @@ export interface Prospect {
   numeroAlternativo: string;
   medioCaptacion: string;
   status: 'VOLVER_LLAMAR' | 'MANDAR_INFO' | 'NO_INTERESA' | 'NO_CONTESTA' | 'BUZON' | 'UNAVIABLE' | 'VISITA' | 'LLAMADA' | 'VIDEO_LLAMADA';
-  proximaAccion?: string; // Fecha y hora
+  proximaAccion?: string;
 }
 
 export type AppContextType = 'CORE' | 'MASTER_MODULE' | 'SUPER_ADMIN' | 'ONBOARDING';

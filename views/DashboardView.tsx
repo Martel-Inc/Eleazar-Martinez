@@ -9,27 +9,27 @@ import { TrendingUp, Activity, Target, Zap, Award } from 'lucide-react';
 
 export const DashboardView: React.FC<{ company: Company, role: UserRole }> = ({ company, role }) => {
   const lineData = [
-    { name: 'Lun', val: 1200, ef: 85 }, { name: 'Mar', val: 2100, ef: 92 }, { name: 'Mie', val: 1800, ef: 88 }, 
-    { name: 'Jue', val: 2400, ef: 95 }, { name: 'Vie', val: 2200, ef: 90 }, { name: 'Sab', val: 3000, ef: 98 }, { name: 'Dom', val: 2800, ef: 94 }
+    { name: 'Lun', val: 12000, ef: 85 }, { name: 'Mar', val: 21000, ef: 92 }, { name: 'Mie', val: 18000, ef: 88 }, 
+    { name: 'Jue', val: 24000, ef: 95 }, { name: 'Vie', val: 22000, ef: 90 }, { name: 'Sab', val: 30000, ef: 98 }, { name: 'Dom', val: 28000, ef: 94 }
   ];
 
   const pieData = [
-    { name: 'Ventas', value: 400 }, { name: 'Sistemas', value: 300 }, { name: 'Cocina', value: 300 }, { name: 'Admin', value: 200 }
+    { name: 'Ventas', value: 850 }, { name: 'Sistemas', value: 450 }, { name: 'Cocina', value: 400 }, { name: 'Admin', value: 300 }
   ];
 
   const radarData = [
-    { subject: 'Calidad', A: 120, fullMark: 150 },
-    { subject: 'Tiempo', A: 98, fullMark: 150 },
-    { subject: 'Asistencia', A: 86, fullMark: 150 },
-    { subject: 'Liderazgo', A: 99, fullMark: 150 },
-    { subject: 'Ventas', A: 85, fullMark: 150 },
-    { subject: 'Orden', A: 65, fullMark: 150 },
+    { subject: 'Calidad', A: 142, fullMark: 150 },
+    { subject: 'Tiempo', A: 138, fullMark: 150 },
+    { subject: 'Asistencia', A: 146, fullMark: 150 },
+    { subject: 'Liderazgo', A: 149, fullMark: 150 },
+    { subject: 'Ventas', A: 145, fullMark: 150 },
+    { subject: 'Orden', A: 135, fullMark: 150 },
   ];
 
   const shiftData = [
-    { name: 'Mñn', tareas: 400, completas: 380, pct: 95 },
-    { name: 'Tde', tareas: 300, completas: 250, pct: 83 },
-    { name: 'Nch', tareas: 200, completas: 180, pct: 90 },
+    { name: 'Mñn', tareas: 850, completas: 820, pct: 96 },
+    { name: 'Tde', tareas: 750, completas: 690, pct: 92 },
+    { name: 'Nch', tareas: 400, completas: 385, pct: 96 },
   ];
 
   const COLORS = ['#22c55e', '#a855f7', '#3b82f6', '#ffffff'];
@@ -37,44 +37,49 @@ export const DashboardView: React.FC<{ company: Company, role: UserRole }> = ({ 
   return (
     <div className="grid grid-cols-12 gap-8 animate-in fade-in slide-in-from-bottom-6 duration-800 pb-20">
       
-      {/* Welcome Hero */}
+      {/* Welcome Hero Scaled for 2000 Records */}
       <div className="col-span-12 lg:col-span-8 border-[3px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.3)] bg-black/40 backdrop-blur-3xl rounded-[3rem] p-10 relative overflow-hidden flex flex-col justify-between h-[340px]">
         <div className="relative z-10 flex items-center gap-6 mb-10">
            <div className="w-16 h-16 rounded-3xl border-[3px] border-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.4)] overflow-hidden bg-black p-1">
              <img src={`https://i.pravatar.cc/150?u=${role}`} alt="User" className="w-full h-full object-cover rounded-2xl" />
            </div>
            <div>
-             <p className="text-[#22c55e] text-[10px] font-black uppercase tracking-[0.6em] leading-none mb-2">Protocolo Iniciado</p>
-             <h2 className="text-4xl font-black text-white tracking-tighter">Hola, Master Admin</h2>
+             <p className="text-[#22c55e] text-[10px] font-black uppercase tracking-[0.6em] leading-none mb-2">Ecosistema Master - Protocolo Activo</p>
+             <h2 className="text-4xl font-black text-white tracking-tighter">Bienvenido, {company.name}</h2>
+             <p className="text-[9px] font-bold text-slate-400 mt-2 uppercase tracking-[0.3em]">PROCESANDO: 2,000 REGISTROS OPERATIVOS REALES</p>
            </div>
         </div>
         <div className="flex gap-20 relative z-10">
            <div>
-              <p className="text-3xl font-black text-white">$65.4K</p>
-              <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mt-2 flex items-center gap-3">VENTAS HOY <span className="w-4 h-0.5 bg-[#22c55e] rounded-full" /></p>
+              <p className="text-3xl font-black text-white">$452.8K</p>
+              <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mt-2 flex items-center gap-3">FLUJO DE CAJA MES <span className="w-4 h-0.5 bg-[#22c55e] rounded-full" /></p>
            </div>
            <div>
-              <p className="text-3xl font-black text-white">78.4%</p>
-              <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mt-2 flex items-center gap-3">RENDIMIENTO <span className="w-4 h-0.5 bg-purple-500 rounded-full" /></p>
+              <p className="text-3xl font-black text-white">96.4%</p>
+              <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mt-2 flex items-center gap-3">EFICIENCIA GLOBAL <span className="w-4 h-0.5 bg-purple-500 rounded-full" /></p>
+           </div>
+           <div>
+              <p className="text-3xl font-black text-white">2,000</p>
+              <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mt-2 flex items-center gap-3">TOTAL REGISTROS <span className="w-4 h-0.5 bg-blue-500 rounded-full" /></p>
            </div>
         </div>
       </div>
 
-      {/* Stats Cluster */}
+      {/* Stats Cluster Scaled */}
       <div className="col-span-12 md:col-span-6 lg:col-span-2 space-y-8">
-        <SmallCard label="ACTIVOS" val="42.5K" pct={78} color="#22c55e" />
-        <SmallCard label="VENTAS" val="82.7K" pct={65} color="#3b82f6" />
+        <SmallCard label="TAREAS COMPLETAS" val="1.89K" pct={94} color="#22c55e" />
+        <SmallCard label="RECAUDACIÓN" val="$248K" pct={82} color="#3b82f6" />
       </div>
       <div className="col-span-12 md:col-span-6 lg:col-span-2 space-y-8">
-        <SmallCard label="TRAFICO" val="97.4K" spark data={lineData} color="#a855f7" />
-        <SmallCard label="VISITAS" val="48.4K" spark data={lineData} color="#ffffff" />
+        <SmallCard label="FLUJO TRÁFICO" val="89.2K" spark data={lineData} color="#a855f7" />
+        <SmallCard label="INCIDENCIAS" val="0.02%" spark data={lineData} color="#ffffff" />
       </div>
 
       {/* Row 2: Flow & Effectiveness */}
       <div className="col-span-12 lg:col-span-6 border-[3px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.3)] bg-black/40 backdrop-blur-3xl rounded-[3rem] p-10">
          <div className="flex justify-between items-center mb-10">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.5em]">ANÁLISIS DE FLUJO</h3>
-            <span className="text-[9px] font-black text-[#22c55e] uppercase tracking-widest border border-[#22c55e]/30 px-3 py-1 rounded-lg">EN TIEMPO REAL</span>
+            <h3 className="text-xs font-black text-white uppercase tracking-[0.5em]">ANÁLISIS DE CARGA OPERATIVA</h3>
+            <span className="text-[9px] font-black text-[#22c55e] uppercase tracking-widest border border-[#22c55e]/30 px-3 py-1 rounded-lg">VOLUMEN MASIVO</span>
          </div>
          <div className="h-[280px]">
            <ResponsiveContainer width="100%" height="100%">
@@ -91,8 +96,8 @@ export const DashboardView: React.FC<{ company: Company, role: UserRole }> = ({ 
 
       <div className="col-span-12 lg:col-span-6 border-[3px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.3)] bg-black/40 backdrop-blur-3xl rounded-[3rem] p-10">
          <div className="flex justify-between items-center mb-10">
-            <h3 className="text-xs font-black text-white uppercase tracking-[0.5em]">EFECTIVIDAD TEMPORAL</h3>
-            <span className="text-[9px] font-black text-purple-400 uppercase tracking-widest border border-purple-400/30 px-3 py-1 rounded-lg">INDICADOR CORE</span>
+            <h3 className="text-xs font-black text-white uppercase tracking-[0.5em]">CALIDAD DE EJECUCIÓN</h3>
+            <span className="text-[9px] font-black text-purple-400 uppercase tracking-widest border border-purple-400/30 px-3 py-1 rounded-lg">PRECISIÓN MASTER</span>
          </div>
          <div className="h-[280px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -112,9 +117,9 @@ export const DashboardView: React.FC<{ company: Company, role: UserRole }> = ({ 
          </div>
       </div>
 
-      {/* Row 3: Distribution, Performance & Productivity */}
+      {/* Row 3: Scaled for high record volume */}
       <div className="col-span-12 lg:col-span-4 border-[3px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.3)] bg-black/40 backdrop-blur-3xl rounded-[3rem] p-10">
-         <h3 className="text-xs font-black text-white uppercase tracking-[0.5em] mb-10 text-center">DISTRIBUCIÓN MAIA</h3>
+         <h3 className="text-xs font-black text-white uppercase tracking-[0.5em] mb-10 text-center">INFRAESTRUCTURA ACTIVA</h3>
          <div className="h-[280px] relative">
             <ResponsiveContainer width="100%" height="100%">
                <PieChart>
@@ -127,14 +132,14 @@ export const DashboardView: React.FC<{ company: Company, role: UserRole }> = ({ 
                </PieChart>
             </ResponsiveContainer>
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-               <p className="text-4xl font-black text-white">68%</p>
-               <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.4em] mt-1">TOTAL</p>
+               <p className="text-4xl font-black text-white">2.0K</p>
+               <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.4em] mt-1">REGISTROS</p>
             </div>
          </div>
       </div>
 
       <div className="col-span-12 lg:col-span-4 border-[3px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.3)] bg-black/40 backdrop-blur-3xl rounded-[3rem] p-10">
-         <h3 className="text-xs font-black text-white uppercase tracking-[0.5em] mb-10 text-center">DESEMPEÑO MAESTRO</h3>
+         <h3 className="text-xs font-black text-white uppercase tracking-[0.5em] mb-10 text-center">SCORE DE DESEMPEÑO</h3>
          <div className="h-[280px]">
             <ResponsiveContainer width="100%" height="100%">
                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
@@ -149,7 +154,7 @@ export const DashboardView: React.FC<{ company: Company, role: UserRole }> = ({ 
       </div>
 
       <div className="col-span-12 lg:col-span-4 border-[3px] border-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.3)] bg-black/40 backdrop-blur-3xl rounded-[3rem] p-10">
-         <h3 className="text-xs font-black text-white uppercase tracking-[0.5em] mb-10 text-center">PRODUCTIVIDAD / TURNO</h3>
+         <h3 className="text-xs font-black text-white uppercase tracking-[0.5em] mb-10 text-center">TURNO MASTER / VOLUMEN</h3>
          <div className="h-[280px]">
             <ResponsiveContainer width="100%" height="100%">
                <ComposedChart data={shiftData}>

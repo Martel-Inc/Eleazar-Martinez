@@ -4,12 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const MaiaTextLogo = ({ className = "text-4xl" }: { className?: string }) => (
   <div className={`flex flex-col items-center ${className}`}>
-    <div className="maia-logo-neon font-black italic tracking-tighter leading-none select-none">
-      <span className="text-white">MA</span>
+    <div className="maia-logo-neon font-black italic tracking-[0.1em] leading-none select-none flex gap-1">
+      <span className="text-white">M</span>
+      <span className="text-white">A</span>
       <span className="text-[#22c55e]">I</span>
       <span className="text-white">A</span>
     </div>
-    <div className="maia-logo-neon font-black italic tracking-[0.2em] text-white text-[0.325em] uppercase -mt-[0.05em] opacity-100 whitespace-nowrap select-none">
+    <div className="font-black italic tracking-[0.4em] text-white/60 text-[0.3em] uppercase mt-2 whitespace-nowrap select-none">
       MASTER CONTROL
     </div>
   </div>
@@ -28,10 +29,7 @@ export const LogoAnimation: React.FC<{ onComplete: () => void }> = ({ onComplete
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black z-[100] overflow-hidden">
-      <div className="absolute top-[-30%] left-[-30%] w-[80%] h-[80%] bg-emerald-900/10 rounded-full blur-[250px] pointer-events-none" />
-      <div className="absolute bottom-[-30%] right-[-30%] w-[80%] h-[80%] bg-purple-900/10 rounded-full blur-[250px] pointer-events-none" />
-
+    <div className="fixed inset-0 flex items-center justify-center bg-transparent z-[100] overflow-hidden">
       <AnimatePresence mode="wait">
         {phase === 'intro' && (
           <motion.div
@@ -92,7 +90,7 @@ export const LogoAnimation: React.FC<{ onComplete: () => void }> = ({ onComplete
                <span className="text-[#22c55e] font-black text-[16px] uppercase tracking-[1.2em] animate-pulse">
                 ERP GESTION EMPRESARIAL
                </span>
-               <div className="w-[300px] h-1 bg-white/5 rounded-full overflow-hidden mt-6 border border-[#22c55e]/20">
+               <div className="w-[300px] h-1 bg-white/10 rounded-full overflow-hidden mt-6 border border-[#22c55e]/20">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: '100%' }}
